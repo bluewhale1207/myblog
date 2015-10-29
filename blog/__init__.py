@@ -20,6 +20,7 @@ login_manager.init_app(app)
 
 
 db = SQLAlchemy()
+db.init_app(app)
 
 
 @login_manager.user_loader
