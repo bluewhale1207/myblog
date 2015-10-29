@@ -2,7 +2,7 @@
 
 
 class Config(object):
-    DEBUG = True
+    DEBUG = False
     CSRF_ENABLED = True
     SECRET_KEY = '\x9c\xa8\xe7\x93\x9c\xe5\x8d\xa1@\xe6\x9c\xa8\xe7\x93'
 
@@ -20,11 +20,10 @@ class Config(object):
         ['card-test-mc.qpid9r.cfg.cnn1.cache.amazonaws.com.cn:11211']
 
 
-class DevelopmentConfig(object):
+class DevelopmentConfig(Config):
     Debug = True
-    DATABASE_URI = ''
 
 
-class ProductionConfig(object):
+class ProductionConfig(Config):
     Debug = True
     DATABASE_URI = ''
