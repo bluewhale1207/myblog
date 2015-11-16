@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}注册{% endblock %}
+{% block body %}
+<form action="/register" method="post">
+    <input name="email" placeholder="email" type="email">
+    <input type="password" name="password" placeholder="输入密码">
+    <input type="submit">
+</form>
+{% endblock %}
