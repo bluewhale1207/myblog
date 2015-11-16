@@ -1,42 +1,50 @@
 # -*_coding: utf-8 -*-
+import hashlib
 
-from blog import app
-from flask import Blueprint, request, url_for, render_template
-from flask_login import login_required, logout_user, login_user
+from flask import (Blueprint, request, url_for, render_template, redirect,
+                   jsonify)
+from flask_login import login_required, logout_user, login_required
 
-from flask import redirect
+from blog.operation import usercore
 
-from blog.models.model_user import User
-
-mod = Blueprint('auth', __name__)
+mod = Blueprint('/user', __name__)
 
 
-# @app.route('/login', methods=['GET', 'POST'])
+@mod.route('/register', methods=['POST'])
+def register():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    name = request.form.get('name')
+    code, msg = usercore.register(email, password, name=name)
+    print '--------------------------', code, msg
+    return jsonify(code=code, msg=msg)
+
+
+# @mod.route('/login', methods=['GET', 'POST'])
 # def login():
-#     login_user(user, remember=True)
-#     user.update_last_login_time()
+#     if request.method == 'POST':
+#         next = request.args.get('next')
+#         name = request.args.get('name')
+#         password = request.args.get('password')
+
+#         # # permission to access the `next` url
+#         # if not next_is_valid(next):
+#         #     return flask.abort(400)
+
+#         return redirect(next or url_for('.index'))
+#     else:
+#         return render_template('login.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@mod.route('/login-required')
+def user_login_required():
+    return render_template('/login.html')
 
-    if request.method == 'POST':
-        next = request.args.get('next')
-        name = request.args.get('name')
-        password = request.args.get('password')
-        # user = User.query.filter_by(name=name)
-        # hashlib.md5(password).hexdigest()
 
-        user = User.query.filter_by(name=name)
-        login_user(user)
-        # # permission to access the `next` url
-        # if not next_is_valid(next):
-        #     return flask.abort(400)
-
-        # return flask.redirect(next or flask.url_for('index'))
-    else:
-        return render_template('login.html')
-
+@mod.route('/index', methods=['GET'])
+@login_required
+def index():
+    return render_template('/index.html')
 
 # @mod.route('/login', methods=['POST'])
 # def login():
@@ -52,8 +60,8 @@ def login():
 #     return 'login failture'
 
 
-@app.route("/logout")
+@mod.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('.login'))

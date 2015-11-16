@@ -2,6 +2,7 @@
 
 from flask import Blueprint
 import datetime
+from flask import render_template
 
 mod = Blueprint('general', __name__)
 
@@ -13,4 +14,4 @@ def index():
 
 @mod.route('/tags')
 def tags():
-    return 'tags'
+    return render_template('login.html', tag=(1, 2, 3, 4))

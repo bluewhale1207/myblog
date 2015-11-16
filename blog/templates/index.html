@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no" />
+    <title>index</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?{{ hmm_code }}";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+
+<body class="page">
+    <div class="nav">
+        <ul>
+            <li class="login" id="login">
+                <a>商家登录</a>
+            </li>
+            <li>
+                <a href="/">首　　页</a>
+            </li>
+            {% if show_mail %}
+            <li class="mail2gym">
+                <a>致健身场馆的道歉信</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="main">
+        <h1>小熊快跑</h1>
+        <h2>畅享身边百家健身场馆</h2>
+        <p>了解详情，请微信扫码。</p>
+    </div>
+    <div class="dialog login-dialog" id="loginAlert" style="display:none;">
+        <span class="close">关闭</span>
+        <p class="error" id="error" style="display:none;"></p>
+        <input type="text" name="name" class="username" id="name" placeholder="用户名" />
+        <input type="password" name="password" class="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" />
+        <button class="login-btn" id="doLogin">Login</button>
+    </div>
+    <script type="text/javascript" src="{{url_for('static',filename='base-assets/js/jquery-1.11.2.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/index.js')}}"></script>
+</body>
+
+</html>

@@ -9,7 +9,7 @@ class Config(object):
     # db config
     SQLALCHEMY_DATABASE_URI = \
         ('mysql://card:papaya123@card-db-test.ctjngzynjvx4.rds.cn-north-1.'
-         'amazonaws.com.cn/lsj')
+         'amazonaws.com.cn/lsj_test')
     SQLALCHEMY_ECHO = False
 
     # cache config

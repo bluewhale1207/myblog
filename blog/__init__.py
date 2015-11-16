@@ -15,9 +15,9 @@ app.config.from_object(os.environ['BLOG_SETTINGS'])
 
 # 登录
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
-
+login_manager.login_view = '.user_login_required'
+login_manager.login_message = u'请登录'
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -25,7 +25,7 @@ db.init_app(app)
 
 @login_manager.user_loader
 def load_user(username):
-    return User.query.filter_by(username=username).fitst()
+    return User.query.filter_by(name=username).first()
 
 
 from blog.views import general
